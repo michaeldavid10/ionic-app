@@ -4,8 +4,6 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonItem,
-  IonText,
 } from '@ionic/react';
 import './Home.css';
 
