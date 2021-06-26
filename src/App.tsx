@@ -30,7 +30,7 @@ const App: React.FC = () => (
         <Route exact path="/home" component={Home} />
         <Route exact path="/welcome" component={Welcome} />
         <Route exact path="/">
-          <Redirect to="/home" />
+          <Redirect to="/welcome" />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>

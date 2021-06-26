@@ -19,7 +19,7 @@ const Home: React.FC = () => {
       <IonContent>
         <div className="ion-text-center">
           <h1>⚛ Home</h1>
-          <IonItem routerLink="/welcome">Welcome</IonItem>
+          <IonItem routerLink="/welcome/">Welcome</IonItem>
         </div>
       </IonContent>
     </IonPage>
