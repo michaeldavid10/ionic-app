@@ -1,6 +1,7 @@
 import {
   IonContent,
   IonHeader,
+  IonItem,
   IonPage,
   IonTitle,
   IonToolbar,
@@ -17,7 +18,8 @@ const Home: React.FC = () => {
       </IonHeader>
       <IonContent>
         <div className="ion-text-center">
-          <h1>⚛ React</h1>
+          <h1>⚛ Home</h1>
+          <IonItem routerLink="/welcome">Welcome</IonItem>
         </div>
       </IonContent>
     </IonPage>
