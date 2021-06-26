@@ -8,12 +8,11 @@ import React, { useState } from 'react';
 import Slides from '../../components/Slides/Slides';
 import { getSlides } from '../../data/slides';
 import { Slide } from '../../models/slide.model';
-import { useHistory } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import '../Welcome/Welcome.css';
 
-const Welcome: React.FC = () => {
+const Welcome: React.FC<RouteComponentProps> = ({ history }) => {
   const [slides, setSlides] = useState<Slide[]>([]);
-  const history = useHistory();
   const handleGoHome = () => {
     history.push('/home');
   };

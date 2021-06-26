@@ -1,19 +1,18 @@
 import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
   IonButtons,
-  IonCol,
+  IonMenuButton,
+  IonTitle,
   IonContent,
   IonGrid,
-  IonHeader,
-  IonItem,
-  IonMenuButton,
-  IonPage,
   IonRow,
-  IonTitle,
-  IonToolbar,
+  IonCol,
 } from '@ionic/react';
-import './Home.css';
+import React from 'react';
 
-const Home: React.FC = () => {
+const Profile: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -29,7 +28,7 @@ const Home: React.FC = () => {
           <IonRow>
             <IonCol>
               <div className="ion-text-center">
-                <h1>⚛ Home</h1>
+                <h1>⚛ Mi Perfil</h1>
               </div>
             </IonCol>
           </IonRow>
@@ -39,4 +38,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Profile;
