@@ -40,7 +40,7 @@ import Home from './pages/Home/Home';
 import Welcome from './pages/Welcome/Welcome';
 import Maps from './pages/Maps/Maps';
 import Profile from './pages/Profile/Profile';
-
+import ApplicationContextProvider from './context/ApplicationContextProvider';
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
@@ -91,15 +91,17 @@ const App: React.FC = () => (
           </IonList>
         </IonContent>
       </IonMenu>
-      <IonRouterOutlet id="main-app">
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/maps" component={Maps} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/welcome" component={Welcome} />
-        <Route exact path="/">
-          <Redirect to="/welcome" />
-        </Route>
-      </IonRouterOutlet>
+      <ApplicationContextProvider>
+        <IonRouterOutlet id="main-app">
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/maps" component={Maps} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/welcome" component={Welcome} />
+          <Route exact path="/">
+            <Redirect to="/welcome" />
+          </Route>
+        </IonRouterOutlet>
+      </ApplicationContextProvider>
     </IonReactRouter>
   </IonApp>
 );

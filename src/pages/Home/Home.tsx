@@ -17,12 +17,14 @@ import {
   IonToolbar,
   useIonViewDidEnter,
 } from '@ionic/react';
-import { useState } from 'react';
+import { useContext } from 'react';
+import ApplicationContext from '../../context/ApplicationContext';
 import { Character } from '../../models/character.model';
 import './Home.css';
 
 const Home: React.FC = () => {
-  const [characters, setCharacters] = useState<Character[]>([]);
+  const applicationContext = useContext(ApplicationContext);
+  //const [characters, setCharacters] = useState<Character[]>([]);
 
   useIonViewDidEnter(() => {
     setTimeout(async () => {
@@ -31,7 +33,7 @@ const Home: React.FC = () => {
       const resultCharacters: Character[] = data.results;
 
       /**ACTUALIZANDO EL ESTADO */
-      setCharacters(resultCharacters);
+      applicationContext.refreshCharacters(resultCharacters);
     }, 3000);
   });
 
@@ -46,7 +48,7 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        {characters.length === 0 ? (
+        {applicationContext.characters.length === 0 ? (
           <IonGrid>
             <IonRow>
               <IonCol className="ion-text-center">
@@ -89,7 +91,7 @@ const Home: React.FC = () => {
           </IonGrid>
         ) : (
           <IonGrid>
-            {characters.map((item) => (
+            {applicationContext.characters.map((item) => (
               <IonRow key={item.id}>
                 <IonCol className="ion-text-center">
                   <IonCard>
