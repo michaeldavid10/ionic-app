@@ -12,6 +12,7 @@ import {
   IonMenuButton,
   IonPage,
   IonRow,
+  IonSkeletonText,
   IonTitle,
   IonToolbar,
   useIonViewDidEnter,
@@ -49,7 +50,40 @@ const Home: React.FC = () => {
           <IonGrid>
             <IonRow>
               <IonCol className="ion-text-center">
-                <p>Cargando...</p>
+                <IonCard>
+                  <IonSkeletonText
+                    animated
+                    style={{ width: '100%', height: '300px' }}
+                  />
+                  <IonCardHeader>
+                    <IonCardSubtitle>
+                      <IonSkeletonText animated style={{ width: '100%' }} />
+                    </IonCardSubtitle>
+                    <IonCardTitle>
+                      <IonSkeletonText animated style={{ width: '100%' }} />
+                    </IonCardTitle>
+                  </IonCardHeader>
+                  <IonCardContent>
+                    <IonSkeletonText animated style={{ width: '100%' }} />
+                  </IonCardContent>
+                </IonCard>
+                <IonCard>
+                  <IonSkeletonText
+                    animated
+                    style={{ width: '100%', height: '300px' }}
+                  />
+                  <IonCardHeader>
+                    <IonCardSubtitle>
+                      <IonSkeletonText animated style={{ width: '100%' }} />
+                    </IonCardSubtitle>
+                    <IonCardTitle>
+                      <IonSkeletonText animated style={{ width: '100%' }} />
+                    </IonCardTitle>
+                  </IonCardHeader>
+                  <IonCardContent>
+                    <IonSkeletonText animated style={{ width: '100%' }} />
+                  </IonCardContent>
+                </IonCard>
               </IonCol>
             </IonRow>
           </IonGrid>
