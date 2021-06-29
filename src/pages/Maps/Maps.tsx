@@ -6,13 +6,39 @@ import {
   IonMenuButton,
   IonTitle,
   IonContent,
-  IonGrid,
-  IonRow,
-  IonCol,
+  useIonViewWillEnter,
 } from '@ionic/react';
-import React from 'react';
+import React, { useState } from 'react';
+import { Geolocation } from '@capacitor/geolocation';
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
+
+const containerStyle = {
+  width: '100%',
+  height: '100%',
+};
 
 const Maps: React.FC = () => {
+  const [location, setLocation] = useState({
+    lat: 28.4743207,
+    lng: -81.4678193,
+  });
+
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: 'AIzaSyCy0Wdha6agFeovPQhW0VF7vEBZqAljDXo',
+  });
+
+  const getCoordinates = async () => {
+    const coordinates = await Geolocation.getCurrentPosition();
+    const lat = coordinates.coords.latitude;
+    const lng = coordinates.coords.longitude;
+    setLocation({ lat: lat, lng: lng });
+  };
+
+  useIonViewWillEnter(() => {
+    getCoordinates();
+  });
+
   return (
     <IonPage>
       <IonHeader>
@@ -24,15 +50,17 @@ const Maps: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonGrid>
-          <IonRow>
-            <IonCol>
-              <div className="ion-text-center">
-                <h1>⚛ Mapas</h1>
-              </div>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
+        {isLoaded ? (
+          <GoogleMap
+            center={location}
+            zoom={13}
+            mapContainerStyle={containerStyle}
+          >
+            <Marker position={{ lat: location.lat, lng: location.lng }} />
+          </GoogleMap>
+        ) : (
+          <h3>Ocurrio un error con la carga.</h3>
+        )}
       </IonContent>
     </IonPage>
   );
