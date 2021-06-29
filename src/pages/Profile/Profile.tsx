@@ -13,13 +13,21 @@ import {
   IonFabButton,
   IonIcon,
   IonFab,
+  useIonViewWillEnter,
 } from '@ionic/react';
 import { camera } from 'ionicons/icons';
 import React, { useState } from 'react';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import './Profile.css';
+import { Storage } from '@capacitor/storage';
+
 const Profile: React.FC = () => {
   const [photoUrl, setPhotoUrl] = useState<string | undefined>();
+
+  useIonViewWillEnter(async () => {
+    const { value } = await Storage.get({ key: 'LOOK_SLIDES' });
+    console.log(value);
+  });
 
   const takePhoto = async () => {
     const cameraPhoto = await Camera.getPhoto({
@@ -30,7 +38,6 @@ const Profile: React.FC = () => {
 
     if (cameraPhoto) {
       setPhotoUrl(cameraPhoto.dataUrl);
-      //console.log(cameraPhoto);
     }
   };
   return (

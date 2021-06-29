@@ -9,11 +9,14 @@ import Slides from '../../components/Slides/Slides';
 import { getSlides } from '../../data/slides';
 import { Slide } from '../../models/slide.model';
 import { RouteComponentProps } from 'react-router';
+import { setStorage } from '../../storage/ManageStorage';
 import '../Welcome/Welcome.css';
 
 const Welcome: React.FC<RouteComponentProps> = ({ history }) => {
   const [slides, setSlides] = useState<Slide[]>([]);
+
   const handleGoHome = () => {
+    setStorage('LOOK_SLIDES', 'true');
     history.push('/home');
   };
 
