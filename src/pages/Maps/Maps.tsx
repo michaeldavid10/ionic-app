@@ -7,6 +7,7 @@ import {
   IonTitle,
   IonContent,
   useIonViewWillEnter,
+  IonLoading,
 } from '@ionic/react';
 import React, { useState } from 'react';
 import { Geolocation } from '@capacitor/geolocation';
@@ -59,7 +60,7 @@ const Maps: React.FC = () => {
             <Marker position={{ lat: location.lat, lng: location.lng }} />
           </GoogleMap>
         ) : (
-          <h3>Ocurrio un error con la carga.</h3>
+          <IonLoading isOpen={true} message={'Cargando...'} />
         )}
       </IonContent>
     </IonPage>

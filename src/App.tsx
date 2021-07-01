@@ -26,7 +26,8 @@ import Maps from './pages/Maps/Maps';
 import Profile from './pages/Profile/Profile';
 import ApplicationContextProvider from './context/ApplicationContextProvider';
 import Menu from './components/Menu/Menu';
-import ProtectedRoute from './hoc/ProtectedRoute';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
 
 const App: React.FC = () => {
   return (
@@ -35,7 +36,9 @@ const App: React.FC = () => {
         <Menu />
         <ApplicationContextProvider>
           <IonRouterOutlet id="main-app">
-            <ProtectedRoute path="/home" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/home" component={Home} />
             <Route exact path="/maps" component={Maps} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/welcome" component={Welcome} />
