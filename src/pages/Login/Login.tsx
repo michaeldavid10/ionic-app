@@ -6,19 +6,37 @@ import {
   IonItem,
   IonPage,
 } from '@ionic/react';
-import React from 'react';
+import React, { useContext, useRef } from 'react';
 import { SignIn } from '../../services/AuthenticationService';
 import { User } from '../../models/user.model';
 
 import './Login.css';
+import { Result } from '../../models/resultAuthenticated.model';
+import { Storage } from '@capacitor/storage';
+import ApplicationContext from '../../context/ApplicationContext';
+import { useHistory } from 'react-router';
+
 const Login: React.FC = () => {
+  const applicationContext = useContext(ApplicationContext);
+  const history = useHistory();
+  const refEmail = useRef<HTMLIonInputElement>(null);
+  const refPassword = useRef<HTMLIonInputElement>(null);
   const handleClickSignIn = async () => {
+    const email = refEmail.current?.value as string;
+    const password = refPassword.current?.value as string;
+
     const userSignIn: User = {
-      email: 'rdelarosa@gmail.com',
-      password: 'NewHorizons2021',
+      email: email,
+      password: password,
     };
-    const resultSignIn = await SignIn(userSignIn);
-    console.log(resultSignIn);
+    const resultSignIn: Result = await SignIn(userSignIn);
+    if (resultSignIn.isAuthenticated) {
+      Storage.set({ key: 'IS_AUTHENTICATED', value: 'true' });
+      applicationContext.refreshAuthenticated();
+      //history.push('/home');
+    } else {
+      console.log(resultSignIn.message);
+    }
   };
 
   return (
@@ -34,10 +52,20 @@ const Login: React.FC = () => {
         </figure>
         <br />
         <IonItem lines="none" className="ion-item-login">
-          <IonInput type="email" placeholder="Correo Electronico" />
+          <IonInput
+            type="email"
+            placeholder="Correo Electronico"
+            ref={refEmail}
+            value="rdelarosa@gmail.com"
+          />
         </IonItem>
         <IonItem lines="none" className="ion-item-login">
-          <IonInput type="password" placeholder="Contraseña" />
+          <IonInput
+            type="password"
+            placeholder="Contraseña"
+            ref={refPassword}
+            value="NewHorizons2021"
+          />
         </IonItem>
       </IonContent>
       <IonFooter className="ion-padding">

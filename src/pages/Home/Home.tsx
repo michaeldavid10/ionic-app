@@ -24,7 +24,6 @@ import './Home.css';
 
 const Home: React.FC = () => {
   const applicationContext = useContext(ApplicationContext);
-  //const [characters, setCharacters] = useState<Character[]>([]);
 
   useIonViewDidEnter(() => {
     setTimeout(async () => {

@@ -1,11 +1,11 @@
 {
-    "users": [
-        {
-            "id": 300620212039,
-            "firstName": "Renato",
-            "lastName": "De la Rosa",
-            "email": "rdelarosa@gmail.com",
-            "password": "TmV3SG9yaXpvbnMyMDIx"
-        }
-    ]
+  "users": [
+    {
+      "id": 300620212039,
+      "firstName": "Renato",
+      "lastName": "De la Rosa",
+      "email": "rdelarosa@gmail.com",
+      "password": "TmV3SG9yaXpvbnMyMDIx"
+    }
+  ]
 }
