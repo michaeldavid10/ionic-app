@@ -23,6 +23,7 @@ const Register: React.FC = () => {
   const history = useHistory();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [message, setMessage] = useState<string>();
+
   const refFirstName = useRef<HTMLIonInputElement>(null);
   const refLastName = useRef<HTMLIonInputElement>(null);
   const refEmail = useRef<HTMLIonInputElement>(null);
@@ -74,27 +75,16 @@ const Register: React.FC = () => {
           />
         </figure>
         <IonItem lines="none" className="ion-item-register">
-          <IonInput
-            type="text"
-            placeholder="Nombres"
-            ref={refFirstName}
-            value=""
-          />
+          <IonInput type="text" placeholder="Nombres" ref={refFirstName} />
         </IonItem>
         <IonItem lines="none" className="ion-item-register">
-          <IonInput
-            type="text"
-            placeholder="Apellidos"
-            ref={refLastName}
-            value=""
-          />
+          <IonInput type="text" placeholder="Apellidos" ref={refLastName} />
         </IonItem>
         <IonItem lines="none" className="ion-item-register">
           <IonInput
             type="email"
             placeholder="Correo Electronico"
             ref={refEmail}
-            value=""
           />
         </IonItem>
         <IonItem lines="none" className="ion-item-register">
@@ -102,7 +92,6 @@ const Register: React.FC = () => {
             type="password"
             placeholder="Contraseña"
             ref={refPassword}
-            value=""
           />
         </IonItem>
         <IonAlert

@@ -38,6 +38,7 @@ const App: React.FC = () => {
   return (
     <IonApp>
       <IonReactRouter>
+        {/* {applicationContext.isAuthenticated ? <Menu /> : null} */}
         <Menu />
         <IonRouterOutlet id="main-app">
           <PrivateRouteHoc path="/home" component={Home} />
