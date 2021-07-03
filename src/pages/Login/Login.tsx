@@ -33,7 +33,6 @@ const Login: React.FC = () => {
     if (resultSignIn.isAuthenticated) {
       Storage.set({ key: 'IS_AUTHENTICATED', value: 'true' });
       applicationContext.refreshAuthenticated();
-      //history.push('/home');
     } else {
       console.log(resultSignIn.message);
     }

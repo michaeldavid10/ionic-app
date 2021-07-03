@@ -29,6 +29,8 @@ import Register from './pages/Register/Register';
 import { useContext } from 'react';
 import ApplicationContext from './context/ApplicationContext';
 import Welcome from './pages/Welcome/Welcome';
+import PrivateRouteHoc from './hoc/PrivateRouteHoc';
+import PublicRouteHoc from './hoc/PublicRouteHoc';
 
 const App: React.FC = () => {
   const applicationContext = useContext(ApplicationContext);
@@ -37,22 +39,12 @@ const App: React.FC = () => {
       <IonReactRouter>
         <Menu />
         <IonRouterOutlet id="main-app">
-          <Route
-            exact
-            path="/home"
-            render={() =>
-              applicationContext.isAuthenticated ? (
-                <Home />
-              ) : (
-                <Redirect to="/login" />
-              )
-            }
-          />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/welcome" component={Welcome} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/maps" component={Maps} />
+          <PrivateRouteHoc path="/home" component={Home} />
+          <PrivateRouteHoc path="/welcome" component={Welcome} />
+          <PrivateRouteHoc path="/profile" component={Profile} />
+          <PrivateRouteHoc path="/maps" component={Maps} />
+          <PublicRouteHoc path="/login" component={Login} />
+          <PublicRouteHoc path="/register" component={Register} />
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
