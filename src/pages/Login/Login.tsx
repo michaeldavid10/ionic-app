@@ -14,11 +14,9 @@ import './Login.css';
 import { Result } from '../../models/resultAuthenticated.model';
 import { Storage } from '@capacitor/storage';
 import ApplicationContext from '../../context/ApplicationContext';
-import { useHistory } from 'react-router';
 
 const Login: React.FC = () => {
   const applicationContext = useContext(ApplicationContext);
-  const history = useHistory();
   const refEmail = useRef<HTMLIonInputElement>(null);
   const refPassword = useRef<HTMLIonInputElement>(null);
   const handleClickSignIn = async () => {

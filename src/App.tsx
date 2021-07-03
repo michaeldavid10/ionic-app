@@ -26,11 +26,12 @@ import Profile from './pages/Profile/Profile';
 import Menu from './components/Menu/Menu';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
-import { useContext } from 'react';
-import ApplicationContext from './context/ApplicationContext';
 import Welcome from './pages/Welcome/Welcome';
 import PrivateRouteHoc from './hoc/PrivateRouteHoc';
 import PublicRouteHoc from './hoc/PublicRouteHoc';
+import NotFound from './pages/NotFound/NotFound';
+import { useContext } from 'react';
+import ApplicationContext from './context/ApplicationContext';
 
 const App: React.FC = () => {
   const applicationContext = useContext(ApplicationContext);
@@ -48,6 +49,7 @@ const App: React.FC = () => {
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
+          <Route component={NotFound} />
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>

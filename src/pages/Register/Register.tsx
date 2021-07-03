@@ -74,16 +74,27 @@ const Register: React.FC = () => {
           />
         </figure>
         <IonItem lines="none" className="ion-item-register">
-          <IonInput type="text" placeholder="Nombres" ref={refFirstName} />
+          <IonInput
+            type="text"
+            placeholder="Nombres"
+            ref={refFirstName}
+            value=""
+          />
         </IonItem>
         <IonItem lines="none" className="ion-item-register">
-          <IonInput type="text" placeholder="Apellidos" ref={refLastName} />
+          <IonInput
+            type="text"
+            placeholder="Apellidos"
+            ref={refLastName}
+            value=""
+          />
         </IonItem>
         <IonItem lines="none" className="ion-item-register">
           <IonInput
             type="email"
             placeholder="Correo Electronico"
             ref={refEmail}
+            value=""
           />
         </IonItem>
         <IonItem lines="none" className="ion-item-register">
@@ -91,6 +102,7 @@ const Register: React.FC = () => {
             type="password"
             placeholder="Contraseña"
             ref={refPassword}
+            value=""
           />
         </IonItem>
         <IonAlert

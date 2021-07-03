@@ -14,9 +14,18 @@ import {
 } from '@ionic/react';
 import { close, home, logOut, map, person } from 'ionicons/icons';
 import { menuController } from '@ionic/core';
-import React from 'react';
+import React, { useContext } from 'react';
+import { Storage } from '@capacitor/storage';
+import ApplicationContext from '../../context/ApplicationContext';
 
 const Menu: React.FC = () => {
+  const applicationContext = useContext(ApplicationContext);
+
+  const handleClickSignOut = () => {
+    Storage.remove({ key: 'IS_AUTHENTICATED' });
+    applicationContext.refreshAuthenticated();
+  };
+
   return (
     <IonMenu contentId="main-app" side="end" type="overlay">
       <IonHeader>
@@ -53,7 +62,7 @@ const Menu: React.FC = () => {
             </IonItem>
           </IonMenuToggle>
           <IonMenuToggle>
-            <IonItem lines="none">
+            <IonItem lines="none" onClick={handleClickSignOut}>
               <IonIcon icon={logOut} slot="start"></IonIcon>
               <IonLabel>Cerrar Sesión</IonLabel>
             </IonItem>
