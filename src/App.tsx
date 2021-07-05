@@ -1,5 +1,5 @@
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 /* Core CSS required for Ionic components to work properly */
@@ -37,22 +37,39 @@ const App: React.FC = () => {
   const applicationContext = useContext(ApplicationContext);
   return (
     <IonApp>
-      <IonReactRouter>
-        {/* {applicationContext.isAuthenticated ? <Menu /> : null} */}
-        <Menu />
-        <IonRouterOutlet id="main-app">
-          <PrivateRouteHoc path="/home" component={Home} />
-          <PrivateRouteHoc path="/welcome" component={Welcome} />
-          <PrivateRouteHoc path="/profile" component={Profile} />
-          <PrivateRouteHoc path="/maps" component={Maps} />
-          <PublicRouteHoc path="/login" component={Login} />
-          <PublicRouteHoc path="/register" component={Register} />
-          <Route exact path="/">
-            <Redirect to="/home" />
-          </Route>
-          <Route component={NotFound} />
-        </IonRouterOutlet>
-      </IonReactRouter>
+      <>
+        {applicationContext.isAuthenticated === true ? (
+          <IonReactRouter>
+            <IonSplitPane contentId="main-app">
+              <Menu />
+              <IonRouterOutlet id="main-app">
+                <Route exact path="/home" component={Home} />
+                <Route exact path="/welcome" component={Welcome} />
+                <Route exact path="/profile" component={Profile} />
+                <Route exact path="/maps" component={Maps} />
+                <Route exact path="/">
+                  <Redirect to="/home" />
+                </Route>
+                <Route exact path="/login">
+                  <Redirect to="/home" />
+                </Route>
+                <Route component={NotFound} />
+              </IonRouterOutlet>
+            </IonSplitPane>
+          </IonReactRouter>
+        ) : (
+          <IonReactRouter>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/home">
+              <Redirect to="/login" />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/login" />
+            </Route>
+          </IonReactRouter>
+        )}
+      </>
     </IonApp>
   );
 };

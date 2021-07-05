@@ -19,6 +19,7 @@ const Login: React.FC = () => {
   const applicationContext = useContext(ApplicationContext);
   const refEmail = useRef<HTMLIonInputElement>(null);
   const refPassword = useRef<HTMLIonInputElement>(null);
+
   const handleClickSignIn = async () => {
     const email = refEmail.current?.value as string;
     const password = refPassword.current?.value as string;
