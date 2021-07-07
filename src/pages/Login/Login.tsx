@@ -31,6 +31,7 @@ const Login: React.FC = () => {
     const resultSignIn: Result = await SignIn(userSignIn);
     if (resultSignIn.isAuthenticated) {
       Storage.set({ key: 'IS_AUTHENTICATED', value: 'true' });
+      Storage.set({ key: 'USER', value: JSON.stringify(resultSignIn.data) });
       applicationContext.refreshAuthenticated();
     } else {
       console.log(resultSignIn.message);

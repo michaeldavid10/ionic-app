@@ -20,13 +20,17 @@ import React, { useState } from 'react';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import './Profile.css';
 import { Storage } from '@capacitor/storage';
+import { getStorage } from '../../storage/ManageStorage';
+import { User } from '../../models/user.model';
 
 const Profile: React.FC = () => {
   const [photoUrl, setPhotoUrl] = useState<string | undefined>();
+  const [userData, setUserData] = useState<User | null>();
 
   useIonViewWillEnter(async () => {
     const { value } = await Storage.get({ key: 'LOOK_SLIDES' });
     console.log(value);
+    setUserData(JSON.parse(await getStorage('USER') || '{}'));
   });
 
   const takePhoto = async () => {
@@ -40,6 +44,7 @@ const Profile: React.FC = () => {
       setPhotoUrl(cameraPhoto.dataUrl);
     }
   };
+
   return (
     <IonPage>
       <IonHeader>
@@ -64,8 +69,8 @@ const Profile: React.FC = () => {
                   }
                 />
               </IonAvatar>
-              <h1>Rick Sanchez</h1>
-              <h2>ricksanchez@gmail.com</h2>
+              <h1>{userData?.firstName} {userData?.lastName}</h1>
+              <h2>{userData?.email}</h2>
             </IonCol>
           </IonRow>
         </IonGrid>
