@@ -1,4 +1,5 @@
 import {
+  IonButton,
   IonButtons,
   IonCard,
   IonCardContent,
@@ -7,6 +8,7 @@ import {
   IonCardTitle,
   IonCol,
   IonContent,
+  IonFooter,
   IonGrid,
   IonHeader,
   IonMenuButton,
@@ -20,21 +22,28 @@ import {
 import { useContext } from 'react';
 import ApplicationContext from '../../context/ApplicationContext';
 import { Character } from '../../models/character.model';
+import { ResultInfo } from '../../models/resultInfo.model';
 import './Home.css';
 
 const Home: React.FC = () => {
   const applicationContext = useContext(ApplicationContext);
 
   useIonViewDidEnter(() => {
-    setTimeout(async () => {
-      const result = await fetch('https://rickandmortyapi.com/api/character');
-      const data = await result.json();
-      const resultCharacters: Character[] = data.results;
-
-      /**ACTUALIZANDO EL ESTADO */
-      applicationContext.refreshCharacters(resultCharacters);
-    }, 3000);
+    setTimeout(async () => getApiData('https://rickandmortyapi.com/api/character'), 3000);
   });
+
+  const getApiData = async (url: string) => {
+    const result = await fetch(url);
+    const data = await result.json();
+    const resultCharacters: Character[] = data.results;
+    const resultInfo: ResultInfo = data.info;
+
+    /**ACTUALIZANDO EL ESTADO */
+    applicationContext.refreshCharacters(resultCharacters);
+    applicationContext.refreshResultInfo(resultInfo);
+  }
+
+  const handleClickPage = (url: string) => getApiData(url);
 
   return (
     <IonPage>
@@ -109,6 +118,22 @@ const Home: React.FC = () => {
           </IonGrid>
         )}
       </IonContent>
+      <IonFooter>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonButton color="primary"
+              onClick={() => handleClickPage(applicationContext.resultInfo.prev)}
+              disabled={applicationContext.resultInfo.prev === null ? true : false}
+            >Anterior</IonButton>
+          </IonButtons>
+          <IonButtons slot="end">
+            <IonButton color="primary"            
+              onClick={() => handleClickPage(applicationContext.resultInfo.next)}
+              disabled={applicationContext.resultInfo.next === null ? true : false}
+            >Siguiente</IonButton>
+          </IonButtons>
+        </IonToolbar>
+      </IonFooter>
     </IonPage>
   );
 };

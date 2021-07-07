@@ -6,6 +6,13 @@ const ApplicationContext = React.createContext<ApplicationContextModel>({
   refreshCharacters: () => {},
   isAuthenticated: false,
   refreshAuthenticated: () => {},
+  resultInfo: {
+    count: 0,
+    pages: 0,
+    next: '',
+    prev: ''
+  },
+  refreshResultInfo: () => {}
 });
 
 export default ApplicationContext;
